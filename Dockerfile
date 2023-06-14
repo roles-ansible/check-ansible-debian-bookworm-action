@@ -1,11 +1,11 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 LABEL "maintainer"="L3D <l3d@c3woc.de>"
-LABEL "repository"="https://github.com/roles-ansible/check-ansible-debian-bullseye-action.git"
-LABEL "homepage"="https://github.com/roles-ansible/check-ansible-debian-bullseye-action"
+LABEL "repository"="https://github.com/roles-ansible/check-ansible-debian-bookworm-action.git"
+LABEL "homepage"="https://github.com/roles-ansible/check-ansible-debian-bookworm-action"
 
-LABEL "com.github.actions.name"="check-ansible-debian-bullseye"
-LABEL "com.github.actions.description"="Check ansible role or playbook with Debian bullseye"
+LABEL "com.github.actions.name"="check-ansible-debian-bookworm"
+LABEL "com.github.actions.description"="Check ansible role or playbook with Debian bookworm"
 LABEL "com.github.actions.icon"="aperture"
 LABEL "com.github.actions.color"="green"
 

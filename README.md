@@ -1,17 +1,17 @@
-[![Github Marketplace](https://raw.githubusercontent.com/roles-ansible/check-ansible-debian-bullseye-action/main/.github/marketplace.svg?sanitize=true)](https://github.com/marketplace/actions/check-ansible-debian-bullseye)
-[![MIT License](https://raw.githubusercontent.com/roles-ansible/check-ansible-debian-bullseye-action/main/.github/license.svg?sanitize=true)](https://github.com/roles-ansible/check-ansible-debian-bullseye-action/blob/main/LICENSE)
+[![Github Marketplace](https://raw.githubusercontent.com/roles-ansible/check-ansible-debian-bookworm-action/main/.github/marketplace.svg?sanitize=true)](https://github.com/marketplace/actions/check-ansible-debian-bookworm)
+[![MIT License](https://raw.githubusercontent.com/roles-ansible/check-ansible-debian-bookworm-action/main/.github/license.svg?sanitize=true)](https://github.com/roles-ansible/check-ansible-debian-bookworm-action/blob/main/LICENSE)
 
- Check Ansible Debian bullseye
+ Check Ansible Debian bookworm
 =======================
-This action allows you to test your ansible role or your playbook in a Docker Container with ``debian:bullseye``.
+This action allows you to test your ansible role or your playbook in a Docker Container with ``debian:bookworm``.
 
 ## Usage
-To use the action simply create an ``ansible-debian-bullseye.yml`` *(or choose custom ``*.yml`` name)* in the ``.github/workflows/`` directory.
+To use the action simply create an ``ansible-debian-bookworm.yml`` *(or choose custom ``*.yml`` name)* in the ``.github/workflows/`` directory.
 
 For example:
 
 ```yaml
-name: Ansible check debian:bullseye  # feel free to pick your own name
+name: Ansible check debian:bookworm  # feel free to pick your own name
 
 # yamllint disable-line rule:truthy
 on: [push, pull_request]
@@ -25,9 +25,9 @@ jobs:
     # Important: This sets up your GITHUB_WORKSPACE environment variable
     - uses: actions/checkout@v2
 
-    - name: ansible check with debian:bullseye
+    - name: ansible check with debian:bookworm
       # replace "main" with any valid ref
-      uses: roles-ansible/check-ansible-debian-bullseye-action@main
+      uses: roles-ansible/check-ansible-debian-bookworm-action@main
       with:
         targets: "./"
         #  [required]
