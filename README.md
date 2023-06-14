@@ -11,6 +11,7 @@ To use the action simply create an ``ansible-debian-bookworm.yml`` *(or choose c
 For example:
 
 ```yaml
+---
 name: Ansible check debian:bookworm  # feel free to pick your own name
 
 # yamllint disable-line rule:truthy
@@ -22,46 +23,58 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Important: This sets up your GITHUB_WORKSPACE environment variable
-    - uses: actions/checkout@v2
+      # Important: This sets up your GITHUB_WORKSPACE environment variable
+      - name: Checkout git repo
+        uses: actions/checkout@v3
 
-    - name: ansible check with debian:bookworm
-      # replace "main" with any valid ref
-      uses: roles-ansible/check-ansible-debian-bookworm-action@main
-      with:
-        targets: "./"
-        #  [required]
-        #   Paths to your ansible role or playboox.yml you want to test
-        #   Some Examples:
-        #   targets: "role/my_role/"
-        #   targets: "site.yml"
-        #
-        # group: ""
-        #  [optional]
-        #   When testing playbooks you have to tell ansible
-        #   the group you that we write in our hosts file.
-        #   example:
-        #   group: 'servers'
-        #
-        # hosts: ""
-        #  [optional]
-        #   When testing playbooks you have to give one example
-        #   host this action should use to test your playbook.
-        #   > We only spawn one docker container that mean
-        #   > we can only test one host at the time. Sorry
-        #   some examples:
-        #   hosts: 'localhost'
-        #   hosts: 'srv01.example.com'
-        #
-        # requirements
-        #  [optional]
-        #   When testing playbooks and you are using ansible galaxy,
-        #   you may be interested in installing your requirements
-        #   from ansible galaxy.
-        #   To do this please provide us either the role name directly
-        #   requirements: 'do1jlr.ansible_version'
-        #   or your requiements.yml file.
-        #   requirements: 'requirements.yml'
+      - name: ansible check with debian:bookworm
+        # optionally replace "v1" with any valid git ref (branch, release, commit...)
+        uses: roles-ansible/check-ansible-debian-latest-action@v1
+        with:
+          targets: "/github/workspace"
+          #  [required]
+          #   Paths to your ansible role or playboox.yml you want to test
+          #   Some Examples:
+          #   targets: "role/my_role/"
+          #   targets: "site.yml"
+          #
+          # group: ""
+          #  [optional]
+          #   When testing playbooks you have to tell ansible
+          #   the group you that we write in our hosts file.
+          #   example:
+          #   group: 'servers'
+          #
+          # hosts: ""
+          #  [optional]
+          #   When testing playbooks you have to give one example
+          #   host this action should use to test your playbook.
+          #   > We only spawn one docker container that mean
+          #   > we can only test one host at the time. Sorry
+          #   some examples:
+          #   hosts: 'localhost'
+          #   hosts: 'srv01.example.com'
+          #
+          # requirements: ""
+          #  [optional]
+          #   When testing playbooks and you are using ansible galaxy,
+          #   you may be interested in installing your requirements
+          #   from ansible galaxy.
+          #   To do this please provide us either the role name directly
+          #   requirements: 'do1jlr.ansible_version'
+          #   or your requiements.yml file.
+          #   requirements: 'requirements.yml'
+          #
+          # tags: ""
+          #  [optional]
+          #   If you want to limit the test to some tags, you can use this
+          #   tags or the skiptags option. It will trigger the --tags $tags
+          #   option to ansible.
+          #
+          # skiptags: ""
+          # [optional]
+          #  See tags. This will trigger the --skip-tags $skiptags option
+          #  to ansible.
 ```
 
 Alternatively, you can run the ansible check only on certain branches:
@@ -79,6 +92,12 @@ on:
 or on various [events](https://help.github.com/en/articles/events-that-trigger-workflows)
 
 <br/>
+
+ Limitations
+-------------
+The docker container unfortunately does not support a systemd environment. Therefore, it is currently not possible to test ansible roles that do anything in this direction.
+If you have suggestions how to change this, they are welcome!
+
 
  Contributing
 -------------
