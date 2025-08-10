@@ -21,7 +21,6 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
     python3-dev \
     python3-venv \
     python3-pip \
-    python3-xyz \
     git \
     systemd \
     locales \
